@@ -1,11 +1,12 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Sprout, Droplets, CloudRain, Camera, Lightbulb } from 'lucide-react'
+import { Sprout, Droplets, CloudRain, Camera, Lightbulb, Map } from 'lucide-react'
 
 const nav = [
   { href: '/', icon: Sprout, label: 'Plants' },
   { href: '/care', icon: Droplets, label: 'Care' },
+  { href: '/map', icon: Map, label: 'Map' },
   { href: '/weather', icon: CloudRain, label: 'Weather' },
   { href: '/photos', icon: Camera, label: 'Photos' },
   { href: '/coach', icon: Lightbulb, label: 'Coach' },
