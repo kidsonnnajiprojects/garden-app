@@ -87,6 +87,7 @@ export default function MapPage() {
     }
     setSaving(false)
     if (err) { setError(err.message); return }
+    setError(null)
     setSelected(null)
     await load()
   }
