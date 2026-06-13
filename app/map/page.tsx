@@ -181,7 +181,7 @@ export default function MapPage() {
         <div className="fixed inset-0 bg-black/60 z-50 flex items-end"
           onTouchEnd={e => { if (e.target === e.currentTarget) { e.preventDefault(); setSelected(null) } }}
           onClick={e => { if (e.target === e.currentTarget) setSelected(null) }}>
-          <div className="bg-white w-full max-h-[72vh] rounded-t-2xl p-4 overflow-y-auto">
+          <div className="bg-white w-full rounded-t-2xl p-4 overflow-y-auto" style={{ maxHeight: '75vh', paddingBottom: '2rem' }}>
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-semibold text-stone-800">
                 {colLabels[selected.col]}{selected.row + 1}
