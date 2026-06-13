@@ -3,6 +3,7 @@ import { getCurrentWeather } from '@/lib/weather'
 import Link from 'next/link'
 import { Droplets, Plus } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
+import CareAllButtons from '@/components/CareAllButtons'
 
 export const dynamic = 'force-dynamic'
 
@@ -64,6 +65,8 @@ export default async function Home() {
           </div>
         </div>
       )}
+
+      {plants.length > 0 && <CareAllButtons plantIds={plants.map(p => p.id)} />}
 
       <div className="flex items-center justify-between">
         <h2 className="font-semibold text-stone-700">Active Plants ({plants.length})</h2>

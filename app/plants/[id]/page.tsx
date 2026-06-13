@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ChevronLeft, Droplets, Zap, Scissors, Bug, MoreHorizontal } from 'lucide-react'
 import { format, formatDistanceToNow } from 'date-fns'
 import QuickCareButtons from '@/components/QuickCareButtons'
+import DeletePlantButton from '@/components/DeletePlantButton'
 
 export const dynamic = 'force-dynamic'
 
@@ -115,6 +116,7 @@ export default async function PlantPage({ params }: { params: Promise<{ id: stri
       </div>
 
       <QuickCareButtons plantId={plant.id} />
+      <DeletePlantButton plantId={plant.id} />
 
       <div>
         <h2 className="font-semibold text-stone-700 mb-3">Care History</h2>
