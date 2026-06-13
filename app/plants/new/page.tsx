@@ -32,7 +32,7 @@ export default function NewPlantPage() {
       notes: form.notes || null,
     })
     setSaving(false)
-    if (!error) router.push('/')
+    if (!error) window.location.href = '/'
   }
 
   const field = (label: string, key: keyof typeof form, type = 'text', placeholder = '') => (
