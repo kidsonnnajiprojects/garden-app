@@ -53,10 +53,13 @@ export default async function PlantPage({ params }: { params: Promise<{ id: stri
     <div className="p-4 space-y-5">
       <div className="flex items-center gap-3 pt-4">
         <Link href="/" className="text-stone-500"><ChevronLeft size={24} /></Link>
-        <div>
+        <div className="flex-1">
           <h1 className="text-xl font-bold text-green-800">{plant.name}</h1>
           {plant.variety && <p className="text-sm text-stone-500">{plant.variety}</p>}
         </div>
+        <Link href={`/plants/${plant.id}/edit`} className="text-sm text-green-700 font-medium px-3 py-1.5 border border-green-200 rounded-lg">
+          Edit
+        </Link>
       </div>
 
       <div className="bg-white rounded-xl border border-stone-200 p-4 space-y-3">
