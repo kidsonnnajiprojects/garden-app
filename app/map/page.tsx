@@ -30,11 +30,12 @@ export default function MapPage() {
   const [selected, setSelected] = useState<{ row: number; col: number } | null>(null)
   const [copied, setCopied] = useState<MapCell | null>(null)
   const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const load = useCallback(async () => {
     const [cellsRes, plantsRes] = await Promise.all([
       supabase.from('garden_map').select('*'),
-      supabase.from('plants').select('*').eq('active', true).order('name'),
+      supabase.from('plants').select('*').order('name'),
     ])
     setCells(cellsRes.data ?? [])
     setPlants(plantsRes.data ?? [])
@@ -71,16 +72,21 @@ export default function MapPage() {
     if (!selected) return
     setSaving(true)
     const cell = getCell(selected.row, selected.col)
+    let err = null
     if (cell) {
       if (plantId === null) {
-        await supabase.from('garden_map').delete().eq('id', cell.id)
+        const res = await supabase.from('garden_map').delete().eq('id', cell.id)
+        err = res.error
       } else {
-        await supabase.from('garden_map').update({ plant_id: plantId }).eq('id', cell.id)
+        const res = await supabase.from('garden_map').update({ plant_id: plantId }).eq('id', cell.id)
+        err = res.error
       }
     } else if (plantId !== null) {
-      await supabase.from('garden_map').insert({ row: selected.row, col: selected.col, plant_id: plantId })
+      const res = await supabase.from('garden_map').insert({ row: selected.row, col: selected.col, plant_id: plantId })
+      err = res.error
     }
     setSaving(false)
+    if (err) { setError(err.message); return }
     setSelected(null)
     await load()
   }
@@ -103,6 +109,12 @@ export default function MapPage() {
           </button>
         )}
       </div>
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 text-xs p-3 rounded-lg mb-3">
+          Error: {error}
+        </div>
+      )}
 
       <div className="flex gap-1.5 mb-3 flex-wrap">
         {Object.entries(categoryBg).map(([cat, bg]) => (
